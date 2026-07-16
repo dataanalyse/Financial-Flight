@@ -147,56 +147,24 @@ const Week8Component: React.FC<Week8Props> = ({ onComplete, onBack }) => {
     }
   }, [gameState.round, currentMarketEvent, showRoundResult, investorGameCompleted]);
 
-  // Quiz questions for Week 8
+  // Quiz question pool — 4 drawn randomly each attempt
   const quizQuestions: QuizQuestion[] = [
-    {
-      question: "What is the main goal of investing?",
-      options: [
-        "Keep money completely safe",
-        "Grow money over time to build wealth",
-        "Spend money on things you want"
-      ],
-      correct: 1,
-      explanation: "Investing is about growing your money over time! While saving keeps money safe, investing gives it the chance to multiply and build real wealth.",
-      hint: "Think about what you want your money to do in the future.",
-      difficulty: 'easy'
-    },
-    {
-      question: "Which investment typically has the highest risk but also highest potential reward?",
-      options: [
-        "Government bonds",
-        "Individual company stocks",
-        "Savings accounts"
-      ],
-      correct: 1,
-      explanation: "Individual stocks can be very risky because one company's fortunes can change quickly, but they also offer the highest growth potential!",
-      hint: "Think about which investment can change the most dramatically.",
-      difficulty: 'medium'
-    },
-    {
-      question: "Why is starting to invest early so powerful?",
-      options: [
-        "You have more money when you're young",
-        "Compound interest has more time to work",
-        "Investments are cheaper when you're young"
-      ],
-      correct: 1,
-      explanation: "Time is your superpower! Compound interest means your money earns money, and then that money earns money too. The longer this happens, the more dramatic the growth!",
-      hint: "Think about how compound interest works over many years.",
-      difficulty: 'medium'
-    },
-    {
-      question: "What does 'diversification' mean in investing?",
-      options: [
-        "Putting all your money in one great investment",
-        "Spreading your money across different types of investments",
-        "Only investing in companies you personally like"
-      ],
-      correct: 1,
-      explanation: "Don't put all your eggs in one basket! Diversification spreads risk so if one investment does poorly, others might do well.",
-      hint: "Think about the phrase 'don't put all your eggs in one basket.'",
-      difficulty: 'medium'
-    }
+    { question: "What is the main goal of investing?", options: ["Keep money completely safe", "Grow money over time to build wealth", "Spend money on things you want"], correct: 1, explanation: "Investing grows your money over time! Saving keeps it safe, but investing gives it the chance to multiply and build real wealth.", hint: "Think about what you want your money to do for your future.", difficulty: 'easy' },
+    { question: "Which investment typically has the highest risk but also highest potential reward?", options: ["Government bonds", "Individual company stocks", "Savings accounts"], correct: 1, explanation: "Individual stocks can be very risky — one company's fortunes can change quickly — but they also offer the highest growth potential!", hint: "Which investment can change most dramatically in value?", difficulty: 'medium' },
+    { question: "Why is starting to invest early so powerful?", options: ["You have more money when you're young", "Compound interest has more time to work", "Investments are cheaper when you're young"], correct: 1, explanation: "Time is your superpower! Compound interest means money earns money, and that money earns money. More time = dramatically more growth!", hint: "Think about how compound interest works over many decades.", difficulty: 'medium' },
+    { question: "What does 'diversification' mean in investing?", options: ["Putting all your money in one great investment", "Spreading your money across different types of investments", "Only investing in companies you personally like"], correct: 1, explanation: "Don't put all your eggs in one basket! Diversification spreads risk — if one investment does poorly, others can offset the loss.", hint: "Think about the phrase 'don't put all your eggs in one basket.'", difficulty: 'medium' },
+    { question: "What is a stock?", options: ["A loan you give to a company", "Part ownership in a company", "A type of savings account"], correct: 1, explanation: "A stock represents a small piece of ownership in a company. If the company grows and profits, your stock becomes more valuable!", hint: "Think about owning a tiny piece of a business.", difficulty: 'easy' },
+    { question: "What is a bond?", options: ["Ownership in a company", "A loan you give to a government or company that pays you interest", "A type of bank account"], correct: 1, explanation: "A bond is like being the lender — you loan money to a government or company and they pay you back with interest over time. Lower risk than stocks!", hint: "Bonds = lending money and getting paid interest in return.", difficulty: 'medium' },
+    { question: "What is an index fund or ETF?", options: ["A fund managed by a single expert investor", "A fund that tracks a market index like the S&P 500, holding many stocks", "A savings account with a fixed return"], correct: 1, explanation: "Index funds track a broad market index, holding hundreds of stocks automatically. They're diversified, low-cost, and historically outperform most active managers!", hint: "Think about owning a tiny piece of many companies at once.", difficulty: 'hard' },
+    { question: "What is 'market risk'?", options: ["The risk of your money being stolen", "The risk that investment values could fall due to economic conditions", "The risk of buying at the wrong store"], correct: 1, explanation: "Market risk means that investment values can drop due to economic downturns, industry changes, or world events — even great companies can lose value temporarily.", hint: "Think about what could cause all investments to fall at once.", difficulty: 'medium' },
+    { question: "What is the general relationship between risk and return in investing?", options: ["Higher risk usually means lower potential return", "Higher risk usually means higher potential return", "Risk and return are completely unrelated"], correct: 1, explanation: "This is a fundamental investing principle: to earn higher returns, you must accept higher risk. Safe investments (bonds) earn less; risky ones (stocks) earn more over time.", hint: "Why would anyone take on more risk if not for a reward?", difficulty: 'medium' },
+    { question: "If the stock market drops 20% this year, what's the smartest move for a long-term investor?", options: ["Sell everything to avoid further losses", "Stay calm and hold — markets historically recover over time", "Put all your money in cash"], correct: 1, explanation: "Market downturns are temporary for long-term investors. Selling locks in losses. History shows the market has always recovered from crashes and gone on to new highs!", hint: "Think about investing as a marathon, not a sprint.", difficulty: 'hard' },
+    { question: "What is a 'portfolio'?", options: ["A folder for school projects", "Your complete collection of investments", "A single stock you own"], correct: 1, explanation: "Your investment portfolio is the total collection of all your investments — stocks, bonds, funds, etc. A well-diversified portfolio manages risk effectively!", hint: "Think about all your investments as one whole.", difficulty: 'easy' },
+    { question: "What does it mean when a company pays a 'dividend'?", options: ["The company is going bankrupt", "The company shares a portion of its profits with shareholders", "The company is issuing new shares"], correct: 1, explanation: "Dividends are regular profit-sharing payments from companies to their shareholders. They provide steady income on top of any price gains!", hint: "Think about a company sharing its success with its owners.", difficulty: 'medium' },
+    { question: "What is 'dollar-cost averaging'?", options: ["Buying investments only when prices are low", "Investing a fixed amount regularly regardless of price", "Averaging the prices of different currencies"], correct: 1, explanation: "Dollar-cost averaging means investing a set amount regularly (e.g., $50/month). You buy more shares when prices are low and fewer when high — reducing the impact of volatility!", hint: "Think about investing consistently on a schedule, not trying to time the market.", difficulty: 'hard' },
+    { question: "What does 'bull market' mean?", options: ["A market full of risky investments", "A period when stock prices are rising and investor confidence is high", "A market that only sells agricultural stocks"], correct: 1, explanation: "A bull market is an extended period of rising stock prices. Investors are optimistic and prices trend upward — opposite of a bear market (falling prices)!", hint: "Bulls charge upward — think of prices charging up.", difficulty: 'medium' },
+    { question: "Why shouldn't you invest money you need within the next year?", options: ["Short-term investing has extra fees", "Markets can drop and may not recover in time — you could lose money you need", "Banks don't allow short-term investing"], correct: 1, explanation: "Markets can be volatile short-term. If you invest money you need soon and the market drops, you might have to sell at a loss. Only invest money you won't need for 5+ years!", hint: "What if the market drops right before you need the money?", difficulty: 'medium' },
+    { question: "What is compound growth in investing?", options: ["When multiple companies grow at once", "When investment returns are reinvested to generate additional returns over time", "When you invest in two different accounts"], correct: 1, explanation: "Compound growth means your returns earn their own returns. A $1,000 investment growing 10%/year becomes $1,100, then $1,210, then $1,331 — it accelerates over time!", hint: "Think about returns building on top of previous returns.", difficulty: 'medium' },
   ];
 
   // Lesson sections for Week 8 - much more detailed like Week 7

@@ -129,56 +129,24 @@ const Week7Component: React.FC<Week7Props> = ({ onComplete, onBack }) => {
     }
   }, [gameState.round, currentEvent, showRoundResult, debtGameCompleted]);
 
-  // Quiz questions for Week 7
+  // Quiz question pool — 4 drawn randomly each attempt
   const quizQuestions: QuizQuestion[] = [
-    {
-      question: "What is debt?",
-      options: [
-        "Free money from the government",
-        "Money you owe to someone else", 
-        "Money you found on the street"
-      ],
-      correct: 1,
-      explanation: "Debt is money you owe! When you borrow money or use credit, you create debt that must be paid back, usually with interest.",
-      hint: "Think about what happens after you borrow money.",
-      difficulty: 'easy'
-    },
-    {
-      question: "Which of these is considered 'good debt'?",
-      options: [
-        "Buying expensive shoes on a credit card",
-        "Taking a student loan for education",
-        "Borrowing money to buy video games"
-      ],
-      correct: 1,
-      explanation: "Student loans are 'good debt' because education helps build your future earning potential! Good debt helps you grow.",
-      hint: "Think about which debt helps build your future.",
-      difficulty: 'medium'
-    },
-    {
-      question: "What happens if you don't pay your credit card bill on time?",
-      options: [
-        "Nothing happens",
-        "You get charged interest and fees",
-        "You get extra money"
-      ],
-      correct: 1,
-      explanation: "Late payments result in interest charges, late fees, and damage to your credit score. It's expensive to be late!",
-      hint: "Credit card companies charge you for being late.",
-      difficulty: 'easy'
-    },
-    {
-      question: "What is a credit score?",
-      options: [
-        "How much money you have in the bank",
-        "A grade that shows how responsible you are with credit",
-        "The number of credit cards you own"
-      ],
-      correct: 1,
-      explanation: "A credit score is like a grade (300-850) that shows lenders how responsible you are with borrowed money. Higher scores = better rates!",
-      hint: "Think of it like a report card for your money behavior.",
-      difficulty: 'medium'
-    }
+    { question: "What is debt?", options: ["Free money from the government", "Money you owe to someone else", "Money you found on the street"], correct: 1, explanation: "Debt is money you owe! When you borrow or use credit, you create debt that must be repaid — usually with interest.", hint: "Think about what happens after you borrow money.", difficulty: 'easy' },
+    { question: "Which of these is considered 'good debt'?", options: ["Buying expensive shoes on a credit card", "Taking a student loan for education", "Borrowing money to buy video games"], correct: 1, explanation: "Student loans are 'good debt' because education increases your future earning potential. Good debt invests in your future!", hint: "Which debt helps build your future?", difficulty: 'medium' },
+    { question: "What happens if you don't pay your credit card bill on time?", options: ["Nothing happens", "You get charged interest and fees", "You get extra money"], correct: 1, explanation: "Late payments trigger interest charges, late fees, and damage to your credit score. It's very expensive to be late!", hint: "Credit card companies penalize you for being late.", difficulty: 'easy' },
+    { question: "What is a credit score?", options: ["How much money you have in the bank", "A grade that shows how responsible you are with credit", "The number of credit cards you own"], correct: 1, explanation: "A credit score (300–850) grades your borrowing behavior. Higher scores mean lenders trust you and offer better interest rates!", hint: "Think of it like a report card for your money behavior.", difficulty: 'medium' },
+    { question: "What credit score range is generally considered 'excellent'?", options: ["300–499", "500–649", "750–850"], correct: 2, explanation: "Scores of 750–850 are excellent! This means lenders see you as very low risk and will offer you the best interest rates on loans.", hint: "Think about which range is closest to the maximum of 850.", difficulty: 'medium' },
+    { question: "Which of these actions HURTS your credit score the most?", options: ["Paying bills on time", "Missing multiple debt payments", "Having a savings account"], correct: 1, explanation: "Missing payments is the biggest credit score killer. Payment history is the single largest factor in your credit score — about 35%!", hint: "Which action breaks the most important credit rule?", difficulty: 'easy' },
+    { question: "What is a credit card's 'credit limit'?", options: ["The maximum amount of interest you can be charged", "The maximum amount you can borrow on the card", "The number of purchases you can make per day"], correct: 1, explanation: "Your credit limit is the maximum balance your card allows. Staying well below it (under 30%) actually helps your credit score!", hint: "It's a cap on how much you can borrow.", difficulty: 'easy' },
+    { question: "What is 'credit utilization'?", options: ["How often you use your credit card", "The percentage of your credit limit you're currently using", "The number of years you've had credit"], correct: 1, explanation: "Credit utilization = (balance ÷ credit limit) × 100. Keeping it under 30% shows lenders you're not over-relying on credit!", hint: "If you have a $1,000 limit and owe $300, you're at 30% utilization.", difficulty: 'hard' },
+    { question: "A mortgage is a loan for buying:", options: ["A car", "A house or property", "An education"], correct: 1, explanation: "A mortgage is a long-term loan (typically 15–30 years) specifically for purchasing real estate. Your home is used as collateral!", hint: "Think about the biggest purchase most adults ever make.", difficulty: 'easy' },
+    { question: "What is an example of 'bad debt'?", options: ["A mortgage on a home", "A high-interest payday loan for daily expenses", "A business loan to start a company"], correct: 1, explanation: "Bad debt is borrowed money for things that don't grow in value, often at high interest rates. Payday loans can trap people in debt cycles!", hint: "Which debt doesn't help your future AND costs the most?", difficulty: 'medium' },
+    { question: "How can you START building a credit history as a teenager?", options: ["Take out a car loan immediately", "Become an authorized user on a parent's card or open a secured credit card", "Ignore credit until you're 21"], correct: 1, explanation: "Being added as an authorized user on a responsible parent's card lets you start building credit history early — without the risk of your own debt!", hint: "Think about low-risk ways to start a credit history young.", difficulty: 'medium' },
+    { question: "What does 'paying in full' on a credit card mean?", options: ["Making the minimum payment", "Paying the entire balance so no interest is charged", "Paying double the minimum"], correct: 1, explanation: "Paying in full every month means you use the card as a convenient payment tool while paying ZERO interest — the smartest way to use credit!", hint: "No remaining balance = no interest charged.", difficulty: 'easy' },
+    { question: "Why do lenders check your credit score?", options: ["To see if you're old enough to borrow", "To assess how likely you are to repay borrowed money on time", "To find out your savings balance"], correct: 1, explanation: "Your credit score tells lenders your borrowing history — a high score means you're reliable, which gets you approved for loans and better rates!", hint: "Lenders want to know if they can trust you to pay them back.", difficulty: 'medium' },
+    { question: "What is a 'debt spiral'?", options: ["A spreadsheet for tracking debt", "When debt keeps growing because interest charges outpace your payments", "Paying off multiple debts at once"], correct: 1, explanation: "A debt spiral happens when interest grows faster than payments — your balance keeps rising even as you make payments. It's a financial trap!", hint: "Think about debt that keeps growing no matter how much you pay.", difficulty: 'hard' },
+    { question: "Which is the best strategy for paying off multiple debts?", options: ["Ignore them and hope they go away", "Prioritize highest-interest debt first while making minimums on others", "Pay equal amounts to all debts simultaneously"], correct: 1, explanation: "The 'avalanche method' — paying off highest-interest debt first — minimizes total interest paid. It saves the most money mathematically!", hint: "Which approach cuts the most expensive debt first?", difficulty: 'hard' },
+    { question: "What does 'defaulting on a loan' mean?", options: ["Paying back a loan early", "Failing to make required loan payments", "Choosing a loan with default settings"], correct: 1, explanation: "Defaulting means failing to repay a loan as agreed. It severely damages your credit score, can lead to collections, and affects your ability to borrow for years!", hint: "Default = failing to meet an obligation.", difficulty: 'medium' },
   ];
 
   // Lesson sections for Week 7

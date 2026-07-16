@@ -92,56 +92,24 @@ const Week4Component: React.FC<Week4Props> = ({ onComplete, onBack }) => {
     { id: 'emergency', name: 'Emergency Fund', emoji: '🆘', price: 5, category: 'savings', selected: false }
   ];
 
-  // Quiz questions for Week 4
+  // Quiz question pool — 4 drawn randomly each attempt
   const quizQuestions: QuizQuestion[] = [
-    {
-      question: "What is a budget?",
-      options: [
-        "A plan for how you spend and save your money",
-        "A list of things you want to buy",
-        "Money you get from your parents"
-      ],
-      correct: 0,
-      explanation: "A budget is a plan that helps you decide how to use your money wisely - for spending, saving, and emergencies!",
-      hint: "Think about what helps you organize and plan your money.",
-      difficulty: 'easy'
-    },
-    {
-      question: "What is a fixed expense?",
-      options: [
-        "Money you spend on fun things",
-        "Money you must pay regularly, like lunch or bus fare",
-        "Money you save for later"
-      ],
-      correct: 1,
-      explanation: "Fixed expenses are things you MUST pay regularly - like school lunch, bus passes, or textbooks. They don't change much from month to month.",
-      hint: "Think about expenses that are the same every month and you can't avoid.",
-      difficulty: 'easy'
-    },
-    {
-      question: "In the 50/30/20 rule, what does the 20% represent?",
-      options: [
-        "Money for wants and fun",
-        "Money for needs and essentials",
-        "Money for savings and emergencies"
-      ],
-      correct: 2,
-      explanation: "The 20% in the 50/30/20 rule is for savings and emergency funds! This helps you prepare for the future and unexpected expenses.",
-      hint: "This is the money you don't spend right away but keep for later.",
-      difficulty: 'medium'
-    },
-    {
-      question: "Why is it important to have an emergency fund?",
-      options: [
-        "To buy more video games",
-        "To handle unexpected expenses like a broken phone",
-        "To impress your friends"
-      ],
-      correct: 1,
-      explanation: "An emergency fund helps you when unexpected things happen - like your bike breaking or needing school supplies you forgot. It keeps you prepared!",
-      hint: "Think about what happens when something unexpected breaks or you need money urgently.",
-      difficulty: 'medium'
-    }
+    { question: "What is a budget?", options: ["A plan for how you spend and save your money", "A list of things you want to buy", "Money you get from your parents"], correct: 0, explanation: "A budget is a plan that helps you decide how to use your money wisely — for spending, saving, and emergencies!", hint: "Think about what helps you organize and plan your money.", difficulty: 'easy' },
+    { question: "What is a fixed expense?", options: ["Money you spend on fun things", "Money you must pay regularly, like lunch or bus fare", "Money you save for later"], correct: 1, explanation: "Fixed expenses are things you MUST pay regularly — like school lunch, bus passes, or textbooks. They're predictable and consistent.", hint: "Think about expenses that are the same every month.", difficulty: 'easy' },
+    { question: "In the 50/30/20 rule, what does the 20% represent?", options: ["Money for wants and fun", "Money for needs and essentials", "Money for savings and emergencies"], correct: 2, explanation: "The 20% in the 50/30/20 rule is for savings and emergency funds — preparing for the future and unexpected expenses!", hint: "This is money you don't spend right away but keep for later.", difficulty: 'medium' },
+    { question: "Why is it important to have an emergency fund?", options: ["To buy more video games", "To handle unexpected expenses like a broken phone", "To impress your friends"], correct: 1, explanation: "An emergency fund helps when unexpected things happen — your bike breaks, you need supplies, or something urgent comes up. It keeps you prepared!", hint: "Think about what happens when something breaks unexpectedly.", difficulty: 'medium' },
+    { question: "In the 50/30/20 rule, what does the 50% cover?", options: ["Entertainment and fun", "Needs like food, transport, and school supplies", "Savings and investments"], correct: 1, explanation: "The 50% goes to NEEDS — essential expenses you must pay to function day-to-day. The 30% covers wants, and 20% goes to savings!", hint: "The largest portion goes to the most important things.", difficulty: 'medium' },
+    { question: "What is a variable expense?", options: ["An expense that stays the same every month", "An expense that changes in amount from month to month", "A luxury item you never buy"], correct: 1, explanation: "Variable expenses change month to month — like eating out, clothes shopping, or entertainment. They're different from fixed costs like rent!", hint: "Think about spending that isn't always exactly the same.", difficulty: 'medium' },
+    { question: "You earn $200 a month. Following the 50/30/20 rule, how much should you save?", options: ["$50", "$40", "$60"], correct: 1, explanation: "20% of $200 = $40. That goes to savings! 50% ($100) to needs, 30% ($60) to wants, 20% ($40) to savings.", hint: "Calculate 20% of $200.", difficulty: 'medium' },
+    { question: "What does it mean to 'balance' a budget?", options: ["To have money left over after all expenses", "To ensure your income covers all your planned spending and saving", "To never spend money on wants"], correct: 1, explanation: "A balanced budget means your income equals your planned spending + saving — nothing is unaccounted for. You're in control!", hint: "Think about making sure everything adds up properly.", difficulty: 'medium' },
+    { question: "Which budgeting mistake is most common for teenagers?", options: ["Saving too much", "Spending more than you earn without tracking", "Having too many bank accounts"], correct: 1, explanation: "Spending without tracking is the #1 budgeting mistake — money disappears on small purchases that add up without you realizing!", hint: "Think about how small daily purchases add up.", difficulty: 'easy' },
+    { question: "What is 'tracking expenses'?", options: ["Following other people's spending habits", "Recording every purchase to see where your money goes", "Counting how many items you buy"], correct: 1, explanation: "Tracking expenses means logging what you spend so you can see patterns, spot wasteful habits, and stick to your budget!", hint: "Think about writing down or recording every purchase.", difficulty: 'easy' },
+    { question: "Your phone bill is $30/month, school lunch is $50/month, and you spend $25/month on games. What is your total monthly spending?", options: ["$95", "$105", "$80"], correct: 1, explanation: "$30 + $50 + $25 = $105. Always add up ALL expenses to see your full monthly picture!", hint: "Add all three amounts together.", difficulty: 'easy' },
+    { question: "What is the purpose of a 'sinking fund'?", options: ["A fund for emergencies", "Saving gradually for a known future expense", "A fund that loses money over time"], correct: 1, explanation: "A sinking fund is intentional saving for a specific future cost — like saving $20/week toward new shoes you know you'll need in 2 months!", hint: "Think about saving for something you KNOW is coming.", difficulty: 'hard' },
+    { question: "If you spend more than you earn, you are:", options: ["Running a surplus", "Running a deficit", "Breaking even"], correct: 1, explanation: "A deficit means you're spending more than you earn — your money runs out before the month ends. That's how debt starts!", hint: "A deficit is the opposite of a surplus.", difficulty: 'medium' },
+    { question: "Which of these is the best first step to creating a budget?", options: ["Guess how much you spend", "Write down all income and all expenses for one month", "Ask a friend what their budget looks like"], correct: 1, explanation: "You can't budget what you don't know! Tracking your real income and spending for one month gives you the data you need to build an accurate budget.", hint: "You need real numbers before you can plan anything.", difficulty: 'easy' },
+    { question: "What is 'pay yourself first'?", options: ["Buying yourself a treat before paying bills", "Automatically moving savings to a separate account before spending", "Paying your own salary"], correct: 1, explanation: "'Pay yourself first' means saving money immediately when you receive income — before any other spending. This ensures savings actually happen!", hint: "Think about saving FIRST, before anything else.", difficulty: 'medium' },
+    { question: "How does a budget help you reach financial goals?", options: ["It doesn't — budgets are just for tracking spending", "It directs money intentionally toward goals instead of letting it disappear", "It automatically invests for you"], correct: 1, explanation: "A budget is a plan with PURPOSE. By allocating money to goals in advance, you make consistent progress instead of wondering where it all went!", hint: "Think about the difference between drifting and driving with a map.", difficulty: 'medium' },
   ];
 
   // Lesson sections for Week 4

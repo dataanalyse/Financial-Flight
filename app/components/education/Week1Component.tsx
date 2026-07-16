@@ -38,56 +38,24 @@ const Week1Component: React.FC<Week1Props> = ({ onComplete, onBack }) => {
 
   const correctTimelineOrder = ['bartering', 'coins', 'paper', 'checks', 'credit', 'digital'];
 
-  // Quiz questions for QuizEngine
+  // Quiz question pool — 4 drawn randomly each attempt
   const quizQuestions: QuizQuestion[] = [
-    {
-      question: "What is bartering?",
-      options: [
-        "Using coins to pay for things",
-        "Trading one thing for another without money",
-        "Saving money in a bank"
-      ],
-      correct: 1,
-      explanation: "Bartering is trading goods or services directly without using money!",
-      hint: "Think about how people traded before money was invented.",
-      difficulty: 'easy'
-    },
-    {
-      question: "Which of these was NOT used as money in history?",
-      options: [
-        "Shells",
-        "Rocks", 
-        "Televisions"
-      ],
-      correct: 2,
-      explanation: "TVs are too modern! Ancient people used shells, rocks, and many other things as money.",
-      hint: "Think about what existed thousands of years ago.",
-      difficulty: 'easy'
-    },
-    {
-      question: "What do we call money you can't see that moves electronically?",
-      options: [
-        "Metal coins",
-        "Digital money",
-        "Paper bills"
-      ],
-      correct: 1,
-      explanation: "Digital money exists only in computers and moves electronically between accounts!",
-      hint: "When you pay with your phone, what kind of money is that?",
-      difficulty: 'medium'
-    },
-    {
-      question: "Why did people invent money?",
-      options: [
-        "To make trading easier",
-        "Because they liked shiny coins",
-        "To play games"
-      ],
-      correct: 0,
-      explanation: "Money solved the problems of bartering and made trading much simpler for everyone!",
-      hint: "Think about the problems with bartering we learned about.",
-      difficulty: 'easy'
-    }
+    { question: "What is bartering?", options: ["Using coins to pay for things", "Trading one thing for another without money", "Saving money in a bank"], correct: 1, explanation: "Bartering is trading goods or services directly without using money!", hint: "Think about how people traded before money was invented.", difficulty: 'easy' },
+    { question: "Which of these was NOT used as money in history?", options: ["Shells", "Rocks", "Televisions"], correct: 2, explanation: "TVs are too modern! Ancient people used shells, rocks, and many other things as money.", hint: "Think about what existed thousands of years ago.", difficulty: 'easy' },
+    { question: "What do we call money you can't see that moves electronically?", options: ["Metal coins", "Digital money", "Paper bills"], correct: 1, explanation: "Digital money exists only in computers and moves electronically between accounts!", hint: "When you pay with your phone, what kind of money is that?", difficulty: 'medium' },
+    { question: "Why did people invent money?", options: ["To make trading easier", "Because they liked shiny coins", "To play games"], correct: 0, explanation: "Money solved the problems of bartering and made trading much simpler for everyone!", hint: "Think about the problems with bartering we learned about.", difficulty: 'easy' },
+    { question: "What were the first coins mostly made from?", options: ["Plastic and rubber", "Gold and silver", "Wood and glass"], correct: 1, explanation: "The first coins were made from precious metals like gold and silver because they were durable, rare, and valuable!", hint: "Think about valuable metals people prized thousands of years ago.", difficulty: 'easy' },
+    { question: "What is the main problem with bartering?", options: ["It's too fast", "Both people must want exactly what the other has", "You need a bank account"], correct: 1, explanation: "Bartering requires a 'double coincidence of wants' — you need someone who has what you want AND wants what you have. Very hard to arrange!", hint: "Imagine trading your sandwich for shoes — you'd need someone selling shoes AND wanting your sandwich.", difficulty: 'medium' },
+    { question: "Paper money was first invented in which country?", options: ["United States", "England", "China"], correct: 2, explanation: "China invented paper money around 700 AD during the Tang Dynasty — centuries before Europe even thought of the idea!", hint: "Which ancient civilization was famous for many inventions?", difficulty: 'medium' },
+    { question: "What gives paper money its value?", options: ["The paper it's printed on", "The gold stored for each bill", "Shared trust and government backing"], correct: 2, explanation: "Modern money is 'fiat currency' — it has value because governments declare it legal tender and people trust and accept it!", hint: "Money works because everyone AGREES it works.", difficulty: 'hard' },
+    { question: "What is a debit card?", options: ["A card that lets you spend money you don't have", "A card linked directly to your bank account balance", "A type of gift card"], correct: 1, explanation: "A debit card draws directly from your bank account — you can only spend what you actually have, unlike a credit card!", hint: "Think about the difference between spending your own money vs. borrowed money.", difficulty: 'easy' },
+    { question: "What is inflation?", options: ["When prices rise and each dollar buys less", "When your savings account grows", "When a product goes on sale"], correct: 0, explanation: "Inflation means prices go up over time, so the same money buys fewer things. That's why saving alone isn't enough — you need to invest too!", hint: "Why could $1 buy a lot more 50 years ago than today?", difficulty: 'hard' },
+    { question: "Cryptocurrency like Bitcoin is best described as:", options: ["Old-fashioned bartering", "Digital currency not controlled by any government", "A bank credit card reward"], correct: 1, explanation: "Cryptocurrency is digital money that operates on a decentralized network — no bank or government controls it!", hint: "It's digital, decentralized, and relatively new.", difficulty: 'hard' },
+    { question: "What does it mean when money is a 'store of value'?", options: ["You can save it and use it later", "You store it in a safe", "It only buys things at stores"], correct: 0, explanation: "A store of value means money holds its worth over time, so you can save today and spend later!", hint: "Think about how honey stays valuable even if you don't eat it today.", difficulty: 'medium' },
+    { question: "Which payment method is typically safest for online purchases?", options: ["Mailing cash", "Credit card with buyer protection", "Sharing your debit number by email"], correct: 1, explanation: "Credit cards have fraud protection — you can dispute charges you didn't make. Cash is irreversible and email is risky!", hint: "Which lets you get your money back if something goes wrong?", difficulty: 'medium' },
+    { question: "When you tap your phone to pay at a store, what is this called?", options: ["Bartering", "Contactless or mobile payment", "Wire transfer"], correct: 1, explanation: "Mobile payment (like Apple Pay or Google Pay) uses NFC technology to wirelessly send payment info from your phone!", hint: "You tap your phone to the payment terminal.", difficulty: 'easy' },
+    { question: "Why do governments control how much money is printed?", options: ["To help paper companies", "To keep prices stable and prevent inflation", "To save trees"], correct: 1, explanation: "Printing too much money makes each dollar worth less (inflation). Governments control money supply to keep the economy balanced!", hint: "What if everyone suddenly got $1 million — would things still cost the same?", difficulty: 'hard' },
+    { question: "Which came FIRST in the history of money?", options: ["Credit cards", "Paper money", "Bartering"], correct: 2, explanation: "Bartering (direct trading) came first — long before any coins or paper money existed. Coins came around 600 BC, paper money around 700 AD!", hint: "Think chronologically — what did people do before any kind of currency existed?", difficulty: 'easy' },
   ];
 
   // Lesson sections for LessonComponent

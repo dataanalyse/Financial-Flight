@@ -77,55 +77,24 @@ const Week3Component: React.FC<Week3Props> = ({ onComplete, onBack }) => {
     medicine: 'needs'
   };
 
+  // Quiz question pool — 4 drawn randomly each attempt
   const quizQuestions: QuizQuestion[] = [
-    {
-      question: "True or False: A smartphone is always a need.",
-      options: [
-        "True - everyone needs a phone",
-        "False - it depends on your situation",
-        "True - you can't live without one"
-      ],
-      correct: 1,
-      explanation: "A smartphone could be a need (for work or emergencies) or a want (for games and social media). It depends on your specific situation!",
-      hint: "Think about whether you could survive and be healthy without one.",
-      difficulty: 'medium'
-    },
-    {
-      question: "If you have $10 and need lunch, what's the smart choice?",
-      options: [
-        "Buy expensive snacks you love",
-        "Buy a healthy, filling meal",
-        "Save the money for later"
-      ],
-      correct: 1,
-      explanation: "When you need something essential like food, it's smart to prioritize a healthy, filling meal over wants!",
-      hint: "Remember, you NEED lunch - what choice satisfies that need best?",
-      difficulty: 'easy'
-    },
-    {
-      question: "What's the main difference between needs and wants?",
-      options: [
-        "Needs are expensive, wants are cheap",
-        "Needs are for survival, wants are for enjoyment",
-        "Needs are boring, wants are fun"
-      ],
-      correct: 1,
-      explanation: "Needs are essential for survival and health, while wants make life more enjoyable but aren't necessary to live!",
-      hint: "Think about what happens if you don't have each one.",
-      difficulty: 'easy'
-    },
-    {
-      question: "Which of these could be EITHER a need or a want?",
-      options: [
-        "A bicycle",
-        "Drinking water",
-        "Video games"
-      ],
-      correct: 0,
-      explanation: "A bicycle could be a need (if it's your only transportation to school/work) or a want (if you just use it for fun)!",
-      hint: "Think about different situations where the same item serves different purposes.",
-      difficulty: 'medium'
-    }
+    { question: "True or False: A smartphone is always a need.", options: ["True - everyone needs a phone", "False - it depends on your situation", "True - you can't live without one"], correct: 1, explanation: "A smartphone could be a need (for work or emergencies) or a want (for games and social media). Context matters!", hint: "Think about whether you could survive and stay healthy without one.", difficulty: 'medium' },
+    { question: "If you have $10 and need lunch, what's the smart choice?", options: ["Buy expensive snacks you love", "Buy a healthy, filling meal", "Save the money for later"], correct: 1, explanation: "When you need something essential like food, prioritize a healthy meal over wants!", hint: "You NEED lunch — what satisfies that need best?", difficulty: 'easy' },
+    { question: "What's the main difference between needs and wants?", options: ["Needs are expensive, wants are cheap", "Needs are for survival, wants are for enjoyment", "Needs are boring, wants are fun"], correct: 1, explanation: "Needs are essential for survival and health, while wants make life more enjoyable but aren't necessary!", hint: "Think about what happens if you don't have each one.", difficulty: 'easy' },
+    { question: "Which of these could be EITHER a need or a want?", options: ["A bicycle", "Drinking water", "Video games"], correct: 0, explanation: "A bicycle could be a need (only transportation to school) or a want (just for fun)! Context determines the category.", hint: "Think about different situations where the same item serves different purposes.", difficulty: 'medium' },
+    { question: "Which of these is ALWAYS a need?", options: ["Brand-new sneakers", "Clean drinking water", "Wireless earbuds"], correct: 1, explanation: "Clean water is essential for life — no human can survive without it. Sneakers and earbuds are wants for most people!", hint: "Which one do you literally need to stay alive?", difficulty: 'easy' },
+    { question: "You get $50 for your birthday. What's the smartest approach?", options: ["Spend it all on wants immediately", "Cover any needs first, save some, then spend the rest on wants", "Put it all in savings and never enjoy it"], correct: 1, explanation: "Smart money management balances needs, savings, AND wants — it's not all-or-nothing! Enjoy some while planning ahead.", hint: "Think about which approach leaves you feeling good financially AND enjoying life.", difficulty: 'medium' },
+    { question: "Your friend says 'I NEED the new gaming console.' Is that accurate?", options: ["Yes, it's a genuine need", "No, it's a want — gaming consoles are not essential for survival", "Only if the old one is broken"], correct: 1, explanation: "Gaming consoles are wants — they're fun but not required for health or survival. Using 'need' for wants is a common money mistake!", hint: "Ask: would you be unhealthy or unable to function without it?", difficulty: 'easy' },
+    { question: "What is 'opportunity cost'?", options: ["The price of a new opportunity", "What you give up when you choose one option over another", "The cost of missing school"], correct: 1, explanation: "Every money decision has an opportunity cost — if you spend $50 on a game, that's $50 you can't save or spend on something else!", hint: "Think about the trade-off you make with every purchase.", difficulty: 'hard' },
+    { question: "Which of these is an example of a 'need' for a student?", options: ["New headphones for music", "Textbooks for class", "A gaming PC"], correct: 1, explanation: "Textbooks are needed for education — they serve an essential purpose. Headphones and gaming PCs are wants for most students!", hint: "Which one is required to do what you're supposed to do as a student?", difficulty: 'easy' },
+    { question: "Why is it important to separate needs from wants when budgeting?", options: ["To make budgeting more complicated", "To ensure essential things are covered before spending on extras", "Needs and wants should never be separated"], correct: 1, explanation: "Covering needs first makes sure you're safe and healthy. After that, any leftover money can go to wants and savings!", hint: "Which should you prioritize if money is tight?", difficulty: 'medium' },
+    { question: "A family spends $2,000/month on rent, $300 on food, and $200 on streaming subscriptions. What is a want?", options: ["Rent", "Food", "Streaming subscriptions"], correct: 2, explanation: "Rent and food are needs — essential for shelter and survival. Streaming subscriptions are wants — enjoyable but not necessary to live!", hint: "Which one could you cut without affecting health or safety?", difficulty: 'medium' },
+    { question: "What does 'impulse buying' mean?", options: ["Buying things very quickly online", "Buying something unplanned based on emotion, not need", "Buying things in bulk to save money"], correct: 1, explanation: "Impulse buying is purchasing on emotion or temptation without thinking it through. It's a major budget-buster!", hint: "Think about buying something you hadn't planned to buy after seeing it.", difficulty: 'medium' },
+    { question: "How can you tell if something is a want vs. a need?", options: ["Wants are always more expensive", "Ask: would I be unsafe or unhealthy without this?", "Wants are things you buy at the mall"], correct: 1, explanation: "The key question is whether you truly NEED it for health or safety. If the answer is no, it's probably a want — even if it feels urgent!", hint: "Strip away emotion and ask the survival question.", difficulty: 'medium' },
+    { question: "Which is the best reason to limit spending on wants?", options: ["To never enjoy anything", "To have money left over for savings and unexpected needs", "Because wants are always wrong"], correct: 1, explanation: "Limiting wants isn't about deprivation — it's about having money available for savings, emergencies, and future goals!", hint: "Think about what you gain by NOT spending everything on fun stuff.", difficulty: 'medium' },
+    { question: "Medicine when you're sick is an example of:", options: ["A want", "A need", "A luxury"], correct: 1, explanation: "Medicine when sick is a definite need — it's required for health and recovery. This is very different from optional supplements or vitamins!", hint: "Is staying healthy a want or a need?", difficulty: 'easy' },
+    { question: "Your internet plan at home is used for school AND gaming. Is it a need or want?", options: ["Pure want", "Pure need", "Both — it serves essential and non-essential purposes"], correct: 2, explanation: "Some things can be both! Internet for school is a need, but using it for gaming is a want. In budgeting, you'd count it as a need since it's essential for school.", hint: "Can it serve both essential and non-essential purposes at the same time?", difficulty: 'hard' },
   ];
 
   const lessonSections: LessonSection[] = [

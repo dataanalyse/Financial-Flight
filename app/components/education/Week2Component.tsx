@@ -70,56 +70,24 @@ const Week2Component: React.FC<Week2Props> = ({ onComplete, onBack }) => {
     'programmer': 'Writes code for websites and apps'
   };
 
-  // Quiz questions for Week 2
+  // Quiz question pool — 4 drawn randomly each attempt
   const quizQuestions: QuizQuestion[] = [
-    {
-      question: "What is a job?",
-      options: [
-        "A kind of money",
-        "Work you do for someone to earn money",
-        "A skill you learn in school"
-      ],
-      correct: 1,
-      explanation: "A job is work you do for someone else (like a company) in exchange for money!",
-      hint: "Think about what your parents do to earn money.",
-      difficulty: 'easy'
-    },
-    {
-      question: "Who is an entrepreneur?",
-      options: [
-        "Someone who fixes cars",
-        "Someone who works for a company",
-        "Someone who starts their own business"
-      ],
-      correct: 2,
-      explanation: "An entrepreneur is someone who starts their own business and takes risks to make money!",
-      hint: "Think about someone who opens their own pizza shop.",
-      difficulty: 'easy'
-    },
-    {
-      question: "Which of these is a skill that could help you earn money?",
-      options: [
-        "Bicycle",
-        "Drawing",
-        "Money"
-      ],
-      correct: 1,
-      explanation: "Drawing is a skill! You could use it to design posters, make art, or create things people want to buy.",
-      hint: "Which one is something you can DO or be good at?",
-      difficulty: 'easy'
-    },
-    {
-      question: "Why do some jobs pay more money than others?",
-      options: [
-        "Because some people are luckier",
-        "Because some jobs need more training and skills",
-        "Because some jobs are more fun"
-      ],
-      correct: 1,
-      explanation: "Jobs that require more education, training, or special skills usually pay more money!",
-      hint: "Think about why a doctor might earn more than someone who works at a store.",
-      difficulty: 'medium'
-    }
+    { question: "What is a job?", options: ["A kind of money", "Work you do for someone to earn money", "A skill you learn in school"], correct: 1, explanation: "A job is work you do for someone else (like a company) in exchange for money!", hint: "Think about what your parents do to earn money.", difficulty: 'easy' },
+    { question: "Who is an entrepreneur?", options: ["Someone who fixes cars", "Someone who works for a company", "Someone who starts their own business"], correct: 2, explanation: "An entrepreneur is someone who starts their own business and takes risks to make money!", hint: "Think about someone who opens their own pizza shop.", difficulty: 'easy' },
+    { question: "Which of these is a skill that could help you earn money?", options: ["Bicycle", "Drawing", "Money"], correct: 1, explanation: "Drawing is a skill! You could use it to design posters, make art, or create things people want to buy.", hint: "Which one is something you can DO or be good at?", difficulty: 'easy' },
+    { question: "Why do some jobs pay more money than others?", options: ["Because some people are luckier", "Because some jobs need more training and skills", "Because some jobs are more fun"], correct: 1, explanation: "Jobs that require more education, training, or special skills usually pay more money!", hint: "Think about why a doctor might earn more than someone at a store.", difficulty: 'medium' },
+    { question: "What is a salary?", options: ["A one-time payment for a task", "A fixed amount paid to an employee each year or month", "Money you earn from selling things"], correct: 1, explanation: "A salary is a set amount paid regularly — usually monthly or annually — regardless of exact hours worked. Many professional jobs use salaries!", hint: "Think about predictable, regular pay.", difficulty: 'easy' },
+    { question: "What is the difference between active income and passive income?", options: ["Active income is always more money", "Active income requires ongoing work; passive income earns even when you rest", "Passive income is illegal"], correct: 1, explanation: "Active income = trading your time for money (a job). Passive income = money that keeps coming in after initial effort, like rental income or royalties!", hint: "Which one earns money while you sleep?", difficulty: 'medium' },
+    { question: "A freelancer is best described as:", options: ["Someone who works for free", "Someone who sells services independently to multiple clients", "Someone who works in a free country"], correct: 1, explanation: "A freelancer works independently — not for one employer. They might design logos, write articles, or code websites for different clients!", hint: "Think about someone who picks their own clients and projects.", difficulty: 'medium' },
+    { question: "What does 'minimum wage' mean?", options: ["The highest amount an employer can pay", "The lowest legal amount an employer must pay per hour", "The average wage in a country"], correct: 1, explanation: "Minimum wage is the legal floor — employers cannot pay workers less than this per hour. It's set by the government to protect workers!", hint: "It's the MINIMUM — the very least allowed.", difficulty: 'easy' },
+    { question: "Which of these best describes 'commission'?", options: ["A flat monthly salary", "Earning a percentage of each sale you make", "A government tax on income"], correct: 1, explanation: "Commission is pay based on performance — salespeople often earn a percentage of everything they sell. The more you sell, the more you earn!", hint: "Think about a car salesperson who earns more when they sell more cars.", difficulty: 'medium' },
+    { question: "Why might someone choose to start a business instead of getting a job?", options: ["It always makes more money", "To have more control, be their own boss, and pursue a passion", "Because jobs are too easy"], correct: 1, explanation: "Entrepreneurs start businesses for freedom, passion, and the potential to build something bigger — though it comes with risk too!", hint: "Think about what you lose when you work for someone else.", difficulty: 'medium' },
+    { question: "What is a 'side hustle'?", options: ["Working illegally at night", "Extra work done outside of a main job to earn more money", "A type of investment"], correct: 1, explanation: "A side hustle is any extra money-making activity outside your main income — tutoring, reselling clothes, making content, dog walking, etc.", hint: "Think about earning extra money in your spare time.", difficulty: 'easy' },
+    { question: "Which of these is an example of passive income for a teenager?", options: ["Babysitting on weekends", "Earning ad revenue from a YouTube channel you made", "Tutoring classmates after school"], correct: 1, explanation: "Once a YouTube video is made and monetized, it keeps earning ad revenue even when you're sleeping or at school — that's passive income!", hint: "Which one earns money without you actively working each time?", difficulty: 'hard' },
+    { question: "What is a 'trade' (as in a trade job)?", options: ["Exchanging goods like in bartering", "A skilled manual occupation like plumbing or electrician work", "A stock market transaction"], correct: 1, explanation: "Trade jobs are skilled manual careers — like plumbers, electricians, carpenters, and mechanics. They often require apprenticeships and pay very well!", hint: "Think about the people who build and fix things in homes and buildings.", difficulty: 'medium' },
+    { question: "Why is it valuable to learn multiple skills?", options: ["More skills means you can charge higher taxes", "Multiple skills make you more adaptable and open more career opportunities", "Skills are only useful if they're technical"], correct: 1, explanation: "The job market changes fast! Having multiple skills — like coding AND communication — makes you more valuable and resilient if one field changes.", hint: "Think about what happens if one type of job disappears — can you pivot?", difficulty: 'medium' },
+    { question: "What does 'gross income' mean?", options: ["Income that smells bad", "Your total earnings before taxes are taken out", "Your earnings after all deductions"], correct: 1, explanation: "Gross income is what you earn BEFORE taxes and deductions. Your 'net income' (take-home pay) is what remains after tax is deducted!", hint: "Gross = the big number before anything is removed.", difficulty: 'hard' },
+    { question: "If you enjoy art and want to earn money from it, which path makes the most sense?", options: ["Give up art — it never pays", "Develop your skill, build a portfolio, and look for design or illustration work", "Only sell art to family"], correct: 1, explanation: "Many careers connect passion and income — graphic design, animation, architecture, and more. Building skill + a portfolio opens real doors!", hint: "Think about how professional artists and designers get paid.", difficulty: 'medium' },
   ];
 
   // Lesson sections for Week 2

@@ -66,56 +66,24 @@ const Week5Component: React.FC<Week5Props> = ({ onComplete, onBack }) => {
     }
   }, [weekProgress]);
 
-  // Quiz questions for Week 5
+  // Quiz question pool — 4 drawn randomly each attempt
   const quizQuestions: QuizQuestion[] = [
-    {
-      question: "What is one reason people save money?",
-      options: [
-        "To make their parents happy",
-        "To prepare for emergencies and future goals",
-        "Because banks force them to"
-      ],
-      correct: 1,
-      explanation: "People save money to be prepared for emergencies, achieve their dreams, and have financial security!",
-      hint: "Think about why having money set aside would be helpful.",
-      difficulty: 'easy'
-    },
-    {
-      question: "What does interest mean?",
-      options: [
-        "Money the bank pays you for saving with them",
-        "Money you pay the bank to keep your money safe",
-        "The cost of buying something expensive"
-      ],
-      correct: 0,
-      explanation: "Interest is like a reward! The bank pays you a small amount for keeping your money with them because they can use it to help other people.",
-      hint: "Think about what the bank gives you as a thank-you for saving.",
-      difficulty: 'easy'
-    },
-    {
-      question: "What makes compound interest magical?",
-      options: [
-        "You earn interest only on your original money",
-        "You earn interest on your money AND on previous interest earned",
-        "It makes your money disappear"
-      ],
-      correct: 1,
-      explanation: "Compound interest is magical because you earn interest on your original money PLUS interest on the interest you've already earned! It grows like a snowball!",
-      hint: "Think about earning rewards on your rewards.",
-      difficulty: 'medium'
-    },
-    {
-      question: "What's a smarter financial move?",
-      options: [
-        "Spend $20 on impulse purchases every week",
-        "Save $5 every week consistently",
-        "Only save money when you feel like it"
-      ],
-      correct: 1,
-      explanation: "Consistent saving, even small amounts like $5/week, builds powerful habits and grows your money over time through compound interest!",
-      hint: "Think about which choice helps your money grow over time.",
-      difficulty: 'medium'
-    }
+    { question: "What is one reason people save money?", options: ["To make their parents happy", "To prepare for emergencies and future goals", "Because banks force them to"], correct: 1, explanation: "People save money to be prepared for emergencies, achieve their dreams, and have financial security!", hint: "Think about why having money set aside is helpful.", difficulty: 'easy' },
+    { question: "What does savings interest mean?", options: ["Money the bank pays you for saving with them", "Money you pay the bank to keep your money safe", "The cost of buying something expensive"], correct: 0, explanation: "Interest is like a reward! The bank pays you for keeping your money with them because they use it to lend to others.", hint: "Think about what the bank gives you as a thank-you for saving.", difficulty: 'easy' },
+    { question: "What makes compound interest magical?", options: ["You earn interest only on your original money", "You earn interest on your money AND on previous interest earned", "It makes your money disappear"], correct: 1, explanation: "Compound interest is magical because you earn interest on your original deposit PLUS interest on interest already earned — it snowballs!", hint: "Think about earning rewards on your rewards.", difficulty: 'medium' },
+    { question: "What's a smarter financial move?", options: ["Spend $20 on impulse purchases every week", "Save $5 every week consistently", "Only save money when you feel like it"], correct: 1, explanation: "Consistent small savings beat sporadic large ones! $5/week becomes $260/year, and compound interest makes it grow even more.", hint: "Which choice builds money over time most reliably?", difficulty: 'medium' },
+    { question: "You save $100 at 10% annual interest. How much do you have after 1 year?", options: ["$100", "$110", "$90"], correct: 1, explanation: "10% of $100 = $10 interest earned. $100 + $10 = $110 after one year. The bank rewards you for saving!", hint: "Calculate 10% of $100 and add it to the original.", difficulty: 'easy' },
+    { question: "Why is starting to save early in life so powerful?", options: ["Young people get special bank rates", "More time means more compound interest cycles, growing money dramatically", "Banks prefer younger customers"], correct: 1, explanation: "Time is money's best friend! The longer compound interest works, the bigger the snowball. Starting at 15 vs. 25 can mean hundreds of thousands of dollars difference!", hint: "Think about how a snowball grows bigger the longer it rolls.", difficulty: 'medium' },
+    { question: "What is an 'APY' (Annual Percentage Yield)?", options: ["The rate banks charge you to borrow money", "The total interest you earn on savings in a full year including compounding", "A type of bank account fee"], correct: 1, explanation: "APY shows the real yearly return on savings, accounting for how often interest compounds. Higher APY = more money earned!", hint: "APY is what you EARN on savings over a year.", difficulty: 'hard' },
+    { question: "What is a savings goal?", options: ["A wish list of expensive things", "A specific target amount you're saving toward by a certain date", "The maximum amount a bank allows"], correct: 1, explanation: "A savings goal is concrete and time-bound — like 'save $300 for a phone by June.' Having a goal makes saving purposeful and motivating!", hint: "Think about saving with a specific target in mind.", difficulty: 'easy' },
+    { question: "Which savings strategy is most effective for most people?", options: ["Saving whatever is left over at month's end", "Automating a set savings amount the day you get paid", "Saving only large amounts when you can"], correct: 1, explanation: "'Pay yourself first' by automating savings immediately after income arrives. Waiting for leftovers almost never works — they disappear!", hint: "Which removes the need for willpower?", difficulty: 'medium' },
+    { question: "If you save $10/week, how much do you save in a year?", options: ["$480", "$520", "$260"], correct: 1, explanation: "$10 × 52 weeks = $520 per year. Small consistent amounts really add up over 12 months!", hint: "Multiply $10 by the number of weeks in a year.", difficulty: 'easy' },
+    { question: "What is a 'high-yield savings account'?", options: ["An account with extra fees", "A savings account that pays significantly more interest than a standard account", "An account only for wealthy people"], correct: 1, explanation: "High-yield savings accounts (often online) pay much higher interest rates than traditional bank accounts — sometimes 10-20× more!", hint: "Think about a savings account that earns MORE.", difficulty: 'hard' },
+    { question: "Why shouldn't you keep ALL your money in a checking account?", options: ["Checking accounts are illegal for savings", "Checking accounts pay little to no interest — your money doesn't grow", "Banks will spend your money"], correct: 1, explanation: "Checking accounts are for spending, not growing. Keeping savings there means missing out on interest. Move savings to a dedicated savings account!", hint: "What's the point of a savings account vs. a checking account?", difficulty: 'medium' },
+    { question: "What is the 'rule of 72'?", options: ["A rule that says save 72% of your income", "Divide 72 by your interest rate to find how many years to double your money", "Save for 72 months before spending"], correct: 1, explanation: "The Rule of 72 is a quick math trick: 72 ÷ interest rate = years to double money. At 6% interest, money doubles in 12 years!", hint: "It's a shortcut to estimate doubling time.", difficulty: 'hard' },
+    { question: "Which habit helps you save more money?", options: ["Checking prices only after buying", "Waiting 24 hours before making unplanned purchases", "Shopping when you're hungry or bored"], correct: 1, explanation: "The 24-hour rule fights impulse buying — most unplanned purchases feel less urgent the next day. It's a simple trick that saves real money!", hint: "Which habit adds a pause before spending?", difficulty: 'medium' },
+    { question: "What does it mean to 'diversify' where you save money?", options: ["Using different coin jars at home", "Spreading savings across different account types for different goals", "Saving in multiple currencies"], correct: 1, explanation: "Smart savers separate money by purpose — emergency fund, short-term goals, long-term savings — often in different accounts with different access rules!", hint: "Different buckets for different purposes.", difficulty: 'hard' },
+    { question: "What is an emergency fund and how much should you aim for?", options: ["Any savings account; $100", "Money set aside specifically for unexpected costs; 3-6 months of expenses", "Savings for fun emergencies; whatever you feel like"], correct: 1, explanation: "An emergency fund is money reserved ONLY for genuine emergencies (job loss, medical costs, major repairs). Financial experts recommend 3-6 months of living expenses!", hint: "Think about how long you could survive financially if you lost income.", difficulty: 'medium' },
   ];
 
   // Lesson sections for Week 5

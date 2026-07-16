@@ -94,51 +94,24 @@ const Week9Component: React.FC<Week9Props> = ({ onComplete, onBack }) => {
     setGoalGameCompleted(false);
   };
 
+  // Quiz question pool — 4 drawn randomly each attempt
   const quizQuestions: QuizQuestion[] = [
-    {
-      question: "What does the 'M' in SMART goals stand for?",
-      options: ['Motivated', 'Measurable', 'Money-focused'],
-      correct: 1,
-      explanation: "Measurable! Your goal needs a number so you know when you've hit it. 'Save $200' is measurable — 'save money' is not!",
-      hint: 'Think about how you would know when you reached your goal.',
-      difficulty: 'easy',
-    },
-    {
-      question: "Which is the BEST example of a SMART financial goal?",
-      options: [
-        "I want to save some money",
-        "I will save $150 in 3 months by setting aside $50 each month",
-        "I'll try to spend less this year",
-      ],
-      correct: 1,
-      explanation: "Option B is SMART — it's Specific ($150 for what), Measurable ($150), Achievable (with a clear plan), and Time-bound (3 months)!",
-      hint: 'Which one tells you exactly what, how much, and when?',
-      difficulty: 'easy',
-    },
-    {
-      question: "You set a goal to save $300 in 2 months but only saved $200. What should you do?",
-      options: [
-        "Give up — you failed",
-        "Adjust the timeline or amount and keep going",
-        "Pretend the goal never existed",
-      ],
-      correct: 1,
-      explanation: "Goals are flexible guides, not punishments! Adjusting and continuing is smart. Progress still beats zero.",
-      hint: 'Think about what an encouraging friend would say.',
-      difficulty: 'medium',
-    },
-    {
-      question: "Why is setting a DEADLINE on a financial goal important?",
-      options: [
-        "It creates urgency and stops you from procrastinating",
-        "Deadlines are not actually needed for money goals",
-        "To stress yourself out",
-      ],
-      correct: 0,
-      explanation: "A deadline turns a wish into a real plan! Without one, it's easy to keep saying 'I'll start next month...' forever.",
-      hint: 'Think about how school project deadlines affect your work.',
-      difficulty: 'easy',
-    },
+    { question: "What does the 'M' in SMART goals stand for?", options: ['Motivated', 'Measurable', 'Money-focused'], correct: 1, explanation: "Measurable! Your goal needs a number so you know when you've hit it. 'Save $200' is measurable — 'save money' is not!", hint: 'How would you know when you reached your goal?', difficulty: 'easy' },
+    { question: "Which is the BEST example of a SMART financial goal?", options: ["I want to save some money", "I will save $150 in 3 months by setting aside $50 each month", "I'll try to spend less this year"], correct: 1, explanation: "Option B is SMART — Specific, Measurable ($150), with a clear plan, and Time-bound (3 months)!", hint: 'Which one tells you exactly what, how much, and when?', difficulty: 'easy' },
+    { question: "You set a goal to save $300 in 2 months but only saved $200. What should you do?", options: ["Give up — you failed", "Adjust the timeline or amount and keep going", "Pretend the goal never existed"], correct: 1, explanation: "Goals are flexible guides, not punishments! Adjusting and continuing is smart. Progress beats zero.", hint: 'What would an encouraging friend say?', difficulty: 'medium' },
+    { question: "Why is setting a DEADLINE on a financial goal important?", options: ["It creates urgency and stops procrastination", "Deadlines are not needed for money goals", "To stress yourself out"], correct: 0, explanation: "A deadline turns a wish into a real plan! Without one, it's easy to keep saying 'I'll start next month...' indefinitely.", hint: 'Think about how school deadlines affect your work.', difficulty: 'easy' },
+    { question: "What does the 'S' in SMART stand for?", options: ['Smart', 'Specific', 'Saving-focused'], correct: 1, explanation: "Specific! A vague goal like 'save money' gives you nothing to aim for. 'Save $500 for a laptop by December' is specific and actionable!", hint: "The more detail, the better — who, what, when, how much.", difficulty: 'easy' },
+    { question: "What does the 'A' in SMART stand for?", options: ['Amazing', 'Achievable', 'Automatic'], correct: 1, explanation: "Achievable! Your goal should stretch you but still be realistic. Saving $10,000 in one month on $0 income isn't achievable — but $50/week might be!", hint: "Can you actually accomplish this with your current situation?", difficulty: 'easy' },
+    { question: "What does 'T' stand for in SMART goals?", options: ['Trackable', 'Time-bound', 'Total'], correct: 1, explanation: "Time-bound! Every financial goal needs a deadline. Without one, there's no urgency and goals drift forever.", hint: "Goals need a 'by when' — a specific end date.", difficulty: 'easy' },
+    { question: "Which of these is a SHORT-TERM financial goal?", options: ["Saving for retirement in 40 years", "Saving $80 for new shoes by next month", "Paying off a 30-year mortgage"], correct: 1, explanation: "Short-term goals are achievable within weeks to a few months. Saving $80 for shoes next month is a perfect short-term goal!", hint: "Think about something you can accomplish very soon.", difficulty: 'easy' },
+    { question: "What is the best way to track progress on a savings goal?", options: ["Remember it mentally without writing anything down", "Use a savings tracker, app, or spreadsheet to record progress regularly", "Only check your balance at the end"], correct: 1, explanation: "Tracking regularly keeps you motivated and lets you spot problems early. Seeing progress (even small) is one of the most powerful motivators!", hint: "Out of sight, out of mind — tracking keeps goals visible.", difficulty: 'medium' },
+    { question: "To save $240 in 6 months, how much do you need to save each month?", options: ["$30", "$40", "$50"], correct: 1, explanation: "$240 ÷ 6 months = $40/month. Breaking big goals into monthly or weekly amounts makes them much more manageable!", hint: "Divide the total amount by the number of months.", difficulty: 'easy' },
+    { question: "What is the biggest reason people fail to reach their financial goals?", options: ["Goals are impossible to reach", "They set vague goals without a plan and give up after one setback", "Banks prevent people from saving"], correct: 1, explanation: "Vague goals + no plan + giving up too soon = almost guaranteed failure. Specific goals with written plans and resilience through setbacks succeed!", hint: "Think about the three main failure points: clarity, plan, persistence.", difficulty: 'medium' },
+    { question: "Why is it helpful to write your financial goals down?", options: ["Writing makes goals legally binding", "Written goals are significantly more likely to be achieved than mental ones", "It doesn't help — goals are goals either way"], correct: 1, explanation: "Research shows written goals are dramatically more likely to be achieved. Writing commits your intention and creates a reference to return to!", hint: "Think about how writing something down changes your commitment to it.", difficulty: 'medium' },
+    { question: "What is a 'stretch goal'?", options: ["A goal you can reach easily", "A challenging goal that pushes you beyond your comfort zone", "A goal about physical fitness and money"], correct: 1, explanation: "Stretch goals push you harder than comfortable — like doubling your normal savings rate for a month. They're motivating when you achieve them!", hint: "Think about a goal that makes you say 'that would be tough but amazing.'", difficulty: 'medium' },
+    { question: "You want to buy a $360 gaming setup. You earn $30/week. What is the minimum weeks needed to save for it?", options: ["10 weeks", "12 weeks", "15 weeks"], correct: 1, explanation: "$360 ÷ $30/week = 12 weeks. Planning the math helps you know exactly when you can reach your goal!", hint: "Divide the total cost by your weekly earnings.", difficulty: 'medium' },
+    { question: "What does 'financial planning' mean?", options: ["Planning a party with a budget", "Setting money goals and creating a strategy to achieve them over time", "Having a financial adviser do everything"], correct: 1, explanation: "Financial planning is taking control of your money future — setting goals, budgeting, saving, investing, and reviewing your progress regularly!", hint: "Think about planning your money life intentionally.", difficulty: 'medium' },
+    { question: "Which mindset best helps achieve financial goals?", options: ["'I'll save when I have more money someday'", "'I'll start small today and build consistently over time'", "'Goals are just for adults — I'll worry later'"], correct: 1, explanation: "Starting small and consistently is how wealth is built. 'Someday' never comes — starting today, even with $5, beats waiting forever!", hint: "Which mindset creates action vs. indefinite delay?", difficulty: 'medium' },
   ];
 
   const lessonSections: LessonSection[] = [

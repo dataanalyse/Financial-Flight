@@ -21,18 +21,25 @@ interface QuizEngineProps {
   showHints?: boolean;
   allowRetry?: boolean;
   randomizeQuestions?: boolean;
-  timeLimit?: number; // in seconds
+  quizSize?: number;
+  timeLimit?: number;
   color?: 'blue' | 'green' | 'purple' | 'orange' | 'pink';
+}
+
+function pickRandom(pool: QuizQuestion[], n: number): QuizQuestion[] {
+  const shuffled = [...pool].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, Math.min(n, pool.length));
 }
 
 const QuizEngine: React.FC<QuizEngineProps> = ({
   questions,
   onComplete,
-  minPassingScore = Math.ceil(questions.length * 0.75), // 75% to pass
+  minPassingScore,
   maxLives = 3,
   showHints = true,
   allowRetry = true,
   randomizeQuestions = false,
+  quizSize = 4,
   timeLimit,
   color = 'purple'
 }) => {
@@ -45,13 +52,14 @@ const QuizEngine: React.FC<QuizEngineProps> = ({
   const [quizComplete, setQuizComplete] = useState(false);
   const [showHint, setShowHint] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState(timeLimit);
-  const [quizQuestions, setQuizQuestions] = useState(questions);
+  const [quizQuestions, setQuizQuestions] = useState<QuizQuestion[]>(() =>
+    pickRandom(questions, quizSize)
+  );
 
-  useEffect(() => {
-    if (randomizeQuestions) {
-      setQuizQuestions([...questions].sort(() => Math.random() - 0.5));
-    }
-  }, [questions, randomizeQuestions]);
+  const passScore = minPassingScore ?? Math.ceil(quizSize * 0.75);
+
+  // no longer needed — initial state handles first draw
+  useEffect(() => {}, [questions, randomizeQuestions]);
 
   useEffect(() => {
     if (timeLimit && timeRemaining !== undefined && timeRemaining > 0 && !showFeedback && !quizComplete) {
@@ -111,7 +119,7 @@ const QuizEngine: React.FC<QuizEngineProps> = ({
 
   const finishQuiz = () => {
     setQuizComplete(true);
-    const passed = score >= minPassingScore && lives > 0;
+    const passed = score >= passScore && lives > 0;
     onComplete(score, passed);
   };
 
@@ -124,9 +132,7 @@ const QuizEngine: React.FC<QuizEngineProps> = ({
     setQuizComplete(false);
     setShowHint(false);
     setTimeRemaining(timeLimit);
-    if (randomizeQuestions) {
-      setQuizQuestions([...questions].sort(() => Math.random() - 0.5));
-    }
+    setQuizQuestions(pickRandom(questions, quizSize));
   };
 
   const formatTime = (seconds: number) => {
@@ -136,7 +142,7 @@ const QuizEngine: React.FC<QuizEngineProps> = ({
   };
 
   if (quizComplete) {
-    const passed = score >= minPassingScore && lives > 0;
+    const passed = score >= passScore && lives > 0;
     return (
       <div className="max-w-4xl mx-auto">
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">

@@ -72,56 +72,24 @@ const Week6Component: React.FC<Week6Props> = ({ onComplete, onBack }) => {
     }
   }, [weekProgress]);
 
-  // Quiz questions for Week 6
+  // Quiz question pool — 4 drawn randomly each attempt
   const quizQuestions: QuizQuestion[] = [
-    {
-      question: "What is interest?",
-      options: [
-        "Free money from the government",
-        "Extra money earned when saving or paid when borrowing",
-        "A type of tax on your income"
-      ],
-      correct: 1,
-      explanation: "Interest is extra money! You earn it when you save (the bank pays you) and you pay it when you borrow (you pay the bank).",
-      hint: "Think about what happens when you put money in a bank or borrow from someone.",
-      difficulty: 'easy'
-    },
-    {
-      question: "If you borrow $100 at 10% interest, how much do you owe?",
-      options: [
-        "$100",
-        "$110", 
-        "$90"
-      ],
-      correct: 1,
-      explanation: "You owe the original $100 PLUS 10% interest ($10), which equals $110 total!",
-      hint: "You pay back the original amount plus the interest charge.",
-      difficulty: 'easy'
-    },
-    {
-      question: "What's the key difference between simple and compound interest?",
-      options: [
-        "Simple interest is easier to calculate",
-        "Compound interest earns interest on previous interest earned",
-        "Simple interest pays more money"
-      ],
-      correct: 1,
-      explanation: "Compound interest is magic! You earn interest on your original money AND on the interest you've already earned. It grows faster!",
-      hint: "Think about earning rewards on your rewards.",
-      difficulty: 'medium'
-    },
-    {
-      question: "Which earns more money over 5 years?",
-      options: [
-        "Simple interest at 10%",
-        "Compound interest at 10%",
-        "They earn exactly the same"
-      ],
-      correct: 1,
-      explanation: "Compound interest always earns more over time because your interest starts earning interest too! It's like a money snowball!",
-      hint: "Which one lets your interest earn more interest?",
-      difficulty: 'medium'
-    }
+    { question: "What is interest?", options: ["Free money from the government", "Extra money earned when saving or paid when borrowing", "A type of tax on your income"], correct: 1, explanation: "Interest is extra money! You earn it when you save (bank pays you) and pay it when you borrow (you pay the bank).", hint: "Think about what happens when you put money in a bank or borrow.", difficulty: 'easy' },
+    { question: "If you borrow $100 at 10% interest, how much do you owe?", options: ["$100", "$110", "$90"], correct: 1, explanation: "You owe the original $100 PLUS 10% interest ($10) = $110 total!", hint: "You pay back the original amount plus the interest charge.", difficulty: 'easy' },
+    { question: "What's the key difference between simple and compound interest?", options: ["Simple interest is easier to calculate", "Compound interest earns interest on previous interest earned", "Simple interest pays more money"], correct: 1, explanation: "Compound interest is magic! You earn interest on your original money AND on interest already earned. It grows exponentially!", hint: "Think about earning rewards on your rewards.", difficulty: 'medium' },
+    { question: "Which earns more money over 5 years at the same rate?", options: ["Simple interest", "Compound interest", "They earn exactly the same"], correct: 1, explanation: "Compound interest always earns more over time because your interest starts earning interest too — it's a money snowball!", hint: "Which one lets your interest earn more interest?", difficulty: 'medium' },
+    { question: "What is APR?", options: ["Annual Profit Rate — how much profit banks make", "Annual Percentage Rate — the yearly cost of borrowing money", "A type of bank account"], correct: 1, explanation: "APR is the Annual Percentage Rate — it tells you the yearly cost of a loan or credit card. Lower APR = cheaper to borrow!", hint: "It's the rate you pay when you borrow.", difficulty: 'medium' },
+    { question: "You save $500 at 5% simple interest for 2 years. How much interest do you earn?", options: ["$25", "$50", "$500"], correct: 1, explanation: "Simple interest: $500 × 5% = $25/year × 2 years = $50 total interest earned!", hint: "Calculate 5% of $500, then multiply by 2 years.", difficulty: 'medium' },
+    { question: "Which is better for SAVING money?", options: ["Simple interest account", "Compound interest account", "They're equally good"], correct: 1, explanation: "Compound interest is better for savings because you earn interest on your growing balance, not just the original deposit. Your money grows faster!", hint: "More growth over time is always better when saving.", difficulty: 'easy' },
+    { question: "Which is worse for BORROWING money?", options: ["Simple interest loan", "Compound interest loan", "They're equally bad"], correct: 1, explanation: "Compound interest on debt is dangerous because you owe interest on interest — debt can spiral quickly! Always prefer simple interest when borrowing.", hint: "Interest on interest hurts when you're the one paying.", difficulty: 'medium' },
+    { question: "If a credit card charges 20% APR and you carry a $500 balance all year, roughly how much interest do you pay?", options: ["$20", "$100", "$500"], correct: 1, explanation: "20% of $500 = $100 in interest over a year. That's a very expensive way to borrow — credit card debt can be crushing!", hint: "Calculate 20% of $500.", difficulty: 'medium' },
+    { question: "How does the bank use your deposited money?", options: ["Keeps it locked in a vault just for you", "Lends it to other customers and pays you interest for using it", "Invests it in the stock market for you"], correct: 1, explanation: "Banks are intermediaries — they take your deposits and lend them to other people at higher rates, paying you a portion as savings interest!", hint: "Think about what banks do with the money you deposit.", difficulty: 'hard' },
+    { question: "What does 'compounding frequency' mean?", options: ["How often you check your bank account", "How often interest is calculated and added to your balance", "The frequency of bank fees"], correct: 1, explanation: "Compounding frequency is how often interest is added — daily, monthly, or yearly. More frequent compounding = more interest earned over time!", hint: "Think about whether interest is added every day vs. once a year.", difficulty: 'hard' },
+    { question: "You invest $1,000 at 7% compound interest for 10 years. Your money approximately:", options: ["Doubles", "Stays the same", "Triples"], correct: 0, explanation: "At 7% compound interest, money roughly doubles in 10 years (Rule of 72: 72÷7≈10 years). $1,000 becomes about $2,000!", hint: "Use the Rule of 72: 72 ÷ 7 = about 10 years to double.", difficulty: 'hard' },
+    { question: "What is a loan?", options: ["Money a bank gives you that you don't have to repay", "Money you borrow that must be repaid with interest", "A type of savings plan"], correct: 1, explanation: "A loan is borrowed money you must repay over time, plus interest. The interest is the bank's fee for lending you money!", hint: "Loans are always temporary — they must be paid back.", difficulty: 'easy' },
+    { question: "Why is it important to understand interest before borrowing?", options: ["It isn't important — just borrow what you need", "So you know the true total cost of what you're borrowing", "To impress the bank manager"], correct: 1, explanation: "Interest can make something cost much more than the original price. Understanding it helps you decide if borrowing is worth it and which loan is cheapest!", hint: "The sticker price isn't the full price when borrowing.", difficulty: 'medium' },
+    { question: "What happens if you only pay the minimum payment on a credit card each month?", options: ["You pay it off quickly", "The balance stays high and interest keeps growing, costing you much more", "The bank rewards you with lower rates"], correct: 1, explanation: "Minimum payments barely cover interest — the principal barely shrinks, and interest keeps accumulating. A $1,000 balance could take years and cost double to pay off!", hint: "Think about what happens when interest is added faster than you're paying.", difficulty: 'hard' },
+    { question: "Which loan scenario costs you LESS overall?", options: ["$1,000 loan at 20% APR for 1 year", "$1,000 loan at 5% APR for 1 year", "Both cost the same"], correct: 1, explanation: "Lower APR = lower cost! At 5% you pay $50 in interest vs. $200 at 20%. Always compare APRs when choosing between loans!", hint: "Lower interest rate = less money you pay back.", difficulty: 'medium' },
   ];
 
   // Lesson sections for Week 6

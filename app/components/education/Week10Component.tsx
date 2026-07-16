@@ -126,51 +126,24 @@ const Week10Component: React.FC<Week10Props> = ({ onComplete, onBack }) => {
 
   const getScore = () => answers.filter(a => a?.correct).length;
 
+  // Quiz question pool — 4 drawn randomly each attempt
   const quizQuestions: QuizQuestion[] = [
-    {
-      question: "What should you NEVER share online or through a payment app with strangers?",
-      options: ['Your favorite movie', 'Your bank account or Social Security number', 'Your city of residence'],
-      correct: 1,
-      explanation: "Your bank account number, SSN, passwords, and card numbers are for your eyes only. No legitimate company will ever ask for these via text, email, or social media.",
-      hint: 'Think about what information could be used to steal your money or identity.',
-      difficulty: 'easy',
-    },
-    {
-      question: "What is 'phishing'?",
-      options: [
-        "A type of online fishing game",
-        "A fake message pretending to be from a trusted source to steal your info",
-        "A way to earn money by clicking on ads",
-      ],
-      correct: 1,
-      explanation: "Phishing is when scammers disguise themselves as banks, stores, or friends to trick you into giving up passwords or financial info. The name comes from 'fishing' for victims.",
-      hint: 'Think about someone pretending to be your bank.',
-      difficulty: 'medium',
-    },
-    {
-      question: "A stranger sends you $200 on Cash App and asks you to send it back. What do you do?",
-      options: [
-        "Send the $200 back right away to be nice",
-        "Don't send it back — report it to Cash App instead",
-        "Keep the money and say nothing",
-      ],
-      correct: 1,
-      explanation: "This is the 'accidental payment' scam! The original payment is usually fraudulent and will be reversed, leaving you out of pocket if you sent real money back. Always report it to the app.",
-      hint: 'Think about what happens if the original payment was made with a stolen card.',
-      difficulty: 'medium',
-    },
-    {
-      question: "Which of these is the safest way to pay for things online?",
-      options: [
-        "Sending cash through the mail",
-        "Wiring money directly from your bank",
-        "Using a credit card or trusted payment service like PayPal",
-      ],
-      correct: 2,
-      explanation: "Credit cards and services like PayPal have buyer protection — if something goes wrong, you can dispute the charge and get your money back. Cash and wire transfers are irreversible.",
-      hint: 'Think about which method gives you the most protection if something goes wrong.',
-      difficulty: 'medium',
-    },
+    { question: "What should you NEVER share with strangers online?", options: ['Your favorite movie', 'Your bank account or Social Security number', 'Your city of residence'], correct: 1, explanation: "Bank account numbers, SSNs, passwords, and card numbers are for your eyes only. No legitimate company asks for these via text, email, or social media!", hint: 'What info could someone use to steal your identity or money?', difficulty: 'easy' },
+    { question: "What is 'phishing'?", options: ["A type of online fishing game", "A fake message pretending to be from a trusted source to steal your info", "A way to earn money by clicking on ads"], correct: 1, explanation: "Phishing is scammers disguising themselves as banks or trusted companies to trick you into revealing passwords or financial info.", hint: 'Think about someone pretending to be your bank.', difficulty: 'medium' },
+    { question: "A stranger sends you $200 on Cash App and asks you to send it back. What do you do?", options: ["Send the $200 back to be nice", "Don't send it — report it to Cash App", "Keep the money and say nothing"], correct: 1, explanation: "This is the 'accidental payment' scam! The original payment was likely fraudulent and will be reversed, leaving you out of pocket. Report it!", hint: 'What if the original payment was made with a stolen card?', difficulty: 'medium' },
+    { question: "Which is the safest way to pay for things online?", options: ["Sending cash through the mail", "Wiring money directly from your bank", "Using a credit card or trusted payment service like PayPal"], correct: 2, explanation: "Credit cards and PayPal have buyer protection — you can dispute charges. Cash and wire transfers are irreversible if something goes wrong!", hint: 'Which method lets you get your money back if needed?', difficulty: 'medium' },
+    { question: "You get a text saying 'Your account is locked. Click here to verify: amaz0n-secure.net.' What should you do?", options: ["Click the link immediately to unlock your account", "Ignore or report it — go directly to the real company's website", "Reply to the text with your password"], correct: 1, explanation: "This is a phishing text! 'Amaz0n-secure.net' is NOT Amazon. Always go directly to the real website by typing it yourself — never click suspicious links.", hint: "Notice the fake URL — real companies don't use modified domain names like 'amaz0n'.", difficulty: 'medium' },
+    { question: "What is 'two-factor authentication' (2FA)?", options: ["Using two passwords", "A security layer requiring a second verification step beyond just a password", "Logging in from two devices"], correct: 1, explanation: "2FA adds an extra step — like a code texted to your phone — so even if someone steals your password, they can't access your account without the second factor!", hint: "Two factors = something you know (password) + something you have (your phone).", difficulty: 'medium' },
+    { question: "Which password is the STRONGEST?", options: ["password123", "MyBirthday1215", "Kx#9mP!2rQv$"], correct: 2, explanation: "Long passwords mixing uppercase, lowercase, numbers, and symbols are hardest to crack. Avoid obvious words, birthdays, or simple patterns!", hint: "Which looks the hardest to guess or brute-force?", difficulty: 'easy' },
+    { question: "What is identity theft?", options: ["Copying someone's style or fashion", "When someone steals your personal info to commit fraud in your name", "Forgetting your own password"], correct: 1, explanation: "Identity theft is when criminals use your personal info (SSN, card numbers, etc.) to open accounts, make purchases, or take loans in your name — devastating financially!", hint: "Think about someone using YOUR information to pretend to be you.", difficulty: 'medium' },
+    { question: "An Instagram ad offers '500% returns in 7 days — guaranteed!' This is most likely:", options: ["A great investment opportunity", "A scam — guaranteed high returns don't exist", "A government program for teens"], correct: 1, explanation: "No investment guarantees 500% returns in a week. This is almost certainly a Ponzi scheme or fraud. If it sounds too good to be true, it always is!", hint: "Guaranteed high returns are the #1 red flag of financial fraud.", difficulty: 'easy' },
+    { question: "What is a 'data breach'?", options: ["When your phone breaks", "When hackers steal personal information from a company's database", "When you break the rules at a bank"], correct: 1, explanation: "Data breaches happen when hackers access a company's database and steal customer info — emails, passwords, card numbers. Always use unique passwords for each site!", hint: "Think about a company's database being hacked and customer info stolen.", difficulty: 'medium' },
+    { question: "What does 'https' in a website URL tell you?", options: ["The site is free to use", "The connection is encrypted and more secure", "The site was built in HTML"], correct: 1, explanation: "HTTPS means the connection between you and the website is encrypted — your data is much safer. Always check for https:// before entering payment info!", hint: "The 's' stands for 'secure.'", difficulty: 'easy' },
+    { question: "Someone offers you a job online that requires you to receive payments and forward them to another account. This is:", options: ["A legitimate payment processing job", "A money mule scam — you'd be helping move stolen money", "A normal banking service job"], correct: 1, explanation: "This is a money mule scam! Criminals use you to move stolen money, making YOU legally liable. It's illegal even if you didn't know the money was stolen.", hint: "Why would a legitimate employer need you to receive and forward someone else's money?", difficulty: 'hard' },
+    { question: "What should you do if you suspect your bank account has been hacked?", options: ["Wait to see if unauthorized charges appear", "Contact your bank immediately, change passwords, and monitor all accounts", "Delete the bank app and forget about it"], correct: 1, explanation: "Act fast! Contact your bank immediately — they can freeze your account, investigate fraudulent transactions, and help you recover. Time is critical with financial fraud!", hint: "Speed matters — every hour of delay can mean more stolen money.", difficulty: 'medium' },
+    { question: "What is 'social engineering' in the context of scams?", options: ["Using social media to market products", "Manipulating people psychologically to reveal information or send money", "Building a social media following for profit"], correct: 1, explanation: "Social engineering exploits human psychology — urgency, fear, trust, or greed — to manipulate people into giving up money or information. It's the most common scam technique!", hint: "It's about manipulating people, not hacking computers.", difficulty: 'hard' },
+    { question: "You use the same password on 20 websites. Why is this dangerous?", options: ["It's not dangerous — efficiency is good", "If one site is breached, hackers can access all 20 accounts", "Websites share passwords with each other"], correct: 1, explanation: "Password reuse is extremely risky! One data breach can unlock all your accounts. Use a password manager to create and store unique passwords for every site!", hint: "What happens to all your other accounts if one site gets hacked and reveals your password?", difficulty: 'medium' },
+    { question: "What is the best way for a teen to stay safe with digital payments?", options: ["Avoid all digital payments forever", "Use trusted apps, enable 2FA, never share credentials, and monitor statements regularly", "Only pay using gift cards to stay anonymous"], correct: 1, explanation: "Digital payments are safe when used properly: trusted apps, 2FA enabled, private credentials, and regular statement reviews catch fraud early!", hint: "Think about all the security habits that protect you in the digital world.", difficulty: 'medium' },
   ];
 
   const lessonSections: LessonSection[] = [
