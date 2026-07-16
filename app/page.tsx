@@ -361,13 +361,27 @@ export default function FinKidsAcademy() {
 
         {/* Earned badges showcase */}
         {Object.keys(player.earnedBadges).length > 0 && (
-          <div className="bg-white bg-opacity-5 border border-white border-opacity-10 rounded-2xl p-6 mb-8">
-            <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
-              <Award className="h-5 w-5 text-yellow-400" /> Your Badges
-            </h3>
-            <div className="flex flex-wrap gap-3">
+          <div className="rounded-2xl p-6 mb-8" style={{ background: "linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e3a5f 100%)", border: "2px solid rgba(167,139,250,0.35)" }}>
+            {/* Header */}
+            <div className="mb-5 text-center">
+              <h3 className="text-2xl font-extrabold text-white tracking-wide inline-flex items-center gap-2">
+                🎉 Badges Collected 🎉
+              </h3>
+              <div className="flex items-center justify-center gap-1 mt-1">
+                <div className="h-0.5 w-12 rounded-full bg-gradient-to-r from-transparent to-purple-400" />
+                <span className="text-lg">😄✨😄</span>
+                <div className="h-0.5 w-12 rounded-full bg-gradient-to-l from-transparent to-purple-400" />
+              </div>
+            </div>
+
+            {/* Badge pills */}
+            <div className="flex flex-wrap gap-3 justify-center">
               {Object.values(player.earnedBadges).map((badge, i) => (
-                <div key={i} className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-500/30 rounded-full px-4 py-2 text-yellow-300 font-semibold text-sm">
+                <div
+                  key={i}
+                  className="flex items-center gap-1.5 rounded-full px-4 py-2 font-bold text-sm shadow-lg"
+                  style={{ background: "linear-gradient(135deg, #f59e0b, #ef4444)", color: "#fff", boxShadow: "0 0 12px rgba(245,158,11,0.45)" }}
+                >
                   {badge}
                 </div>
               ))}
