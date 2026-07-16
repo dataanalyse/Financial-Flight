@@ -171,10 +171,10 @@ export default function FinKidsAcademy() {
               <span className="text-5xl">🎓</span>
             </div>
             <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-2 drop-shadow-lg">
-              FinKids Academy
+              Financial Flight
             </h1>
             <p className="text-xl text-blue-100 font-medium">
-              Master money. Level up your future. 🚀
+              Learn money habits fast. Level up your future. 🚀
             </p>
           </div>
 
@@ -270,7 +270,7 @@ export default function FinKidsAcademy() {
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <span className="text-2xl">🎓</span>
-            <span className="text-white font-extrabold text-lg hidden sm:block">FinKids Academy</span>
+            <span className="text-white font-extrabold text-lg hidden sm:block">Financial Flight</span>
           </div>
 
           {/* XP bar */}
@@ -443,7 +443,7 @@ export default function FinKidsAcademy() {
 
         {/* Footer */}
         <div className="mt-12 text-center text-slate-500 text-sm">
-          <p>FinKids Academy — Built to give every teen a financial head start. 💙</p>
+          <p>Financial Flight — Built to give every teen a financial head start. 💙</p>
         </div>
       </div>
     </div>

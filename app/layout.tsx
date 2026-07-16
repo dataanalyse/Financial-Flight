@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "FinKids Academy — Financial Wisdom for Teens",
+  title: "Financial Flight - Learn Money Habits Fast",
   description: "A fun 10-week course teaching teens ages 13-16 everything they need to know about money.",
 };
 
