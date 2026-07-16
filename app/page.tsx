@@ -288,9 +288,9 @@ export default function FinKidsAcademy() {
           </div>
 
           {/* Streak */}
-          <div className="flex items-center gap-1 bg-orange-500 bg-opacity-20 border border-orange-500 border-opacity-30 rounded-xl px-3 py-1">
-            <Flame className="h-4 w-4 text-orange-400" />
-            <span className="text-orange-300 font-bold text-sm">{player.streak}</span>
+          <div className="flex items-center gap-1.5 rounded-xl px-3 py-1.5" style={{ background: "linear-gradient(135deg, #ea580c, #dc2626)", boxShadow: "0 0 14px rgba(234,88,12,0.7)" }}>
+            <Flame className="h-4 w-4 text-yellow-300 fill-yellow-300" />
+            <span className="text-white font-extrabold text-sm">{player.streak}</span>
           </div>
         </div>
       </nav>
