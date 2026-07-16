@@ -368,9 +368,8 @@ export default function FinKidsAcademy() {
                 🎉 Badges Collected 🎉
               </h3>
               <div className="flex items-center justify-center gap-1 mt-1">
-                <div className="h-0.5 w-12 rounded-full bg-gradient-to-r from-transparent to-purple-400" />
-                <span className="text-lg">😄✨😄</span>
-                <div className="h-0.5 w-12 rounded-full bg-gradient-to-l from-transparent to-purple-400" />
+                <div className="h-0.5 w-24 rounded-full bg-gradient-to-r from-transparent to-purple-400" />
+                <div className="h-0.5 w-24 rounded-full bg-gradient-to-l from-transparent to-purple-400" />
               </div>
             </div>
 
