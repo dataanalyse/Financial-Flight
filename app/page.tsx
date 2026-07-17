@@ -380,10 +380,10 @@ export default function FinKidsAcademy() {
           {/* Switch player */}
           <button
             onClick={handleLogout}
-            className="flex items-center gap-2 bg-white bg-opacity-10 hover:bg-opacity-20 border border-white border-opacity-20 rounded-xl px-3 py-1.5 transition-all"
+            className="flex items-center gap-2 bg-white hover:bg-gray-100 rounded-xl px-3 py-1.5 transition-all shadow"
           >
-            <span className="text-white text-xs opacity-70">⇄</span>
-            <span className="text-white text-sm font-semibold">Switch Player</span>
+            <span className="text-gray-700 text-xs">⇄</span>
+            <span className="text-gray-900 text-sm font-bold">Switch Player</span>
           </button>
         </div>
       </nav>
