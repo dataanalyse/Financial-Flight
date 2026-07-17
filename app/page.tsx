@@ -273,17 +273,40 @@ export default function FinKidsAcademy() {
             <span className="text-white font-extrabold text-lg hidden sm:block">Financial Flight</span>
           </div>
 
-          {/* XP bar */}
-          <div className="flex-1 max-w-xs">
-            <div className="flex items-center justify-between mb-1">
-              <span className="text-yellow-400 text-xs font-bold">{level.emoji} {level.name}</span>
-              <span className="text-white text-xs font-semibold">{player.xp} XP</span>
+          {/* Segmented progress bar */}
+          <div className="flex-1 max-w-sm">
+            <div className="flex justify-between mb-1.5">
+              {[
+                { label: "Beginner",     threshold: 0,    color: "text-green-400"  },
+                { label: "Intermediate", threshold: 375,  color: "text-blue-400"   },
+                { label: "Advanced",     threshold: 750,  color: "text-purple-400" },
+                { label: "Finish ✓",    threshold: 1125, color: "text-yellow-400" },
+              ].map(({ label, threshold, color }) => (
+                <span key={label} className={`text-xs font-bold transition-colors ${player.xp >= threshold ? color : "text-slate-600"}`}>
+                  {label}
+                </span>
+              ))}
             </div>
-            <div className="w-full bg-white bg-opacity-20 rounded-full h-2">
-              <div
-                className="bg-gradient-to-r from-yellow-400 to-orange-400 h-2 rounded-full transition-all duration-700"
-                style={{ width: `${levelProgress}%` }}
-              />
+            <div className="flex gap-1">
+              {[
+                { start: 0,    end: 375,  from: "#4ade80", to: "#22c55e" },
+                { start: 375,  end: 750,  from: "#60a5fa", to: "#3b82f6" },
+                { start: 750,  end: 1125, from: "#c084fc", to: "#a855f7" },
+                { start: 1125, end: 1500, from: "#fbbf24", to: "#f59e0b" },
+              ].map(({ start, end, from, to }, i) => {
+                const fill = Math.min(100, Math.max(0, ((player.xp - start) / (end - start)) * 100));
+                return (
+                  <div key={i} className="flex-1 h-2.5 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.1)" }}>
+                    <div
+                      className="h-full rounded-full transition-all duration-700"
+                      style={{ width: `${fill}%`, background: `linear-gradient(to right, ${from}, ${to})`, boxShadow: fill > 0 ? `0 0 6px ${to}` : "none" }}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+            <div className="text-right mt-1">
+              <span className="text-slate-500 text-xs">{player.xp} / 1500 XP</span>
             </div>
           </div>
 
