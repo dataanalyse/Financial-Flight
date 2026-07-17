@@ -82,6 +82,21 @@ function loadPlayer(): PlayerData | null {
 
 function savePlayer(data: PlayerData) {
   localStorage.setItem("finkids_player", JSON.stringify(data));
+  // Also upsert into the all-profiles list
+  const profiles = loadProfiles();
+  const idx = profiles.findIndex((p) => p.name === data.name);
+  if (idx >= 0) profiles[idx] = data; else profiles.push(data);
+  localStorage.setItem("finkids_profiles", JSON.stringify(profiles));
+}
+
+function loadProfiles(): PlayerData[] {
+  if (typeof window === "undefined") return [];
+  const raw = localStorage.getItem("finkids_profiles");
+  return raw ? JSON.parse(raw) : [];
+}
+
+function clearCurrentPlayer() {
+  localStorage.removeItem("finkids_player");
 }
 
 // ─── App ─────────────────────────────────────────────────────────────────────
@@ -91,11 +106,12 @@ export default function FinKidsAcademy() {
   const [currentWeek, setCurrentWeek] = useState<number | null>(null);
   const [nameInput, setNameInput]     = useState("");
   const [player, setPlayer]           = useState<PlayerData | null>(null);
+  const [profiles, setProfiles]       = useState<PlayerData[]>([]);
   const [showXPPopup, setShowXPPopup] = useState(false);
   const [hydrated, setHydrated]       = useState(false);
 
-  // Check localStorage before rendering anything — prevents landing page flash
   useEffect(() => {
+    setProfiles(loadProfiles());
     const saved = loadPlayer();
     if (saved) {
       const yesterday = new Date();
@@ -115,7 +131,9 @@ export default function FinKidsAcademy() {
 
   const handleStart = () => {
     const name = nameInput.trim() || "Explorer";
-    const newPlayer: PlayerData = {
+    // If this name already has a profile, resume it
+    const existing = loadProfiles().find((p) => p.name.toLowerCase() === name.toLowerCase());
+    const newPlayer: PlayerData = existing ?? {
       name,
       xp: 0,
       streak: 1,
@@ -125,6 +143,7 @@ export default function FinKidsAcademy() {
     };
     savePlayer(newPlayer);
     setPlayer(newPlayer);
+    setProfiles(loadProfiles());
     setView("hub");
   };
 
@@ -163,6 +182,21 @@ export default function FinKidsAcademy() {
     setView("hub");
   };
 
+  const handleLogout = () => {
+    clearCurrentPlayer();
+    setPlayer(null);
+    setProfiles(loadProfiles());
+    setNameInput("");
+    setCurrentWeek(null);
+    setView("landing");
+  };
+
+  const handleSwitchProfile = (profile: PlayerData) => {
+    savePlayer(profile);
+    setPlayer(profile);
+    setView("hub");
+  };
+
   // ── Landing ────────────────────────────────────────────────────────────────
 
   if (view === "landing") {
@@ -197,9 +231,32 @@ export default function FinKidsAcademy() {
             ))}
           </div>
 
+          {/* Existing profiles */}
+          {profiles.length > 0 && (
+            <div className="bg-white bg-opacity-15 rounded-2xl p-5 mb-4">
+              <p className="text-white font-bold text-sm mb-3">👋 Welcome back — who's playing?</p>
+              <div className="flex flex-wrap justify-center gap-3">
+                {profiles.map((p) => (
+                  <button
+                    key={p.name}
+                    onClick={() => handleSwitchProfile(p)}
+                    className="flex flex-col items-center bg-white bg-opacity-20 hover:bg-opacity-30 text-white rounded-2xl px-5 py-3 transition-all transform hover:scale-105"
+                  >
+                    <span className="text-2xl mb-1">🎓</span>
+                    <span className="font-bold text-sm">{p.name}</span>
+                    <span className="text-xs text-blue-100">{p.completedWeeks.length}/10 weeks · {p.xp} XP</span>
+                  </button>
+                ))}
+              </div>
+              <p className="text-blue-200 text-xs mt-3">Or create a new player below ↓</p>
+            </div>
+          )}
+
           {/* Onboarding card */}
           <div className="bg-white rounded-3xl p-8 shadow-2xl mb-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Ready to begin? 🌟</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+              {profiles.length > 0 ? "New Player 🆕" : "Ready to begin? 🌟"}
+            </h2>
             <p className="text-gray-500 mb-6">Enter your name and start your journey to becoming a money master!</p>
             <input
               type="text"
@@ -319,6 +376,16 @@ export default function FinKidsAcademy() {
             <Flame className="h-4 w-4 text-yellow-300 fill-yellow-300" />
             <span className="text-white font-extrabold text-sm">{player.streak}</span>
           </div>
+
+          {/* Switch player */}
+          <button
+            onClick={handleLogout}
+            title="Switch player"
+            className="flex items-center gap-1.5 bg-white bg-opacity-10 hover:bg-opacity-20 border border-white border-opacity-20 rounded-xl px-3 py-1.5 transition-all"
+          >
+            <span className="text-white text-sm font-semibold hidden sm:block">{player.name}</span>
+            <span className="text-white text-xs opacity-60">⇄</span>
+          </button>
         </div>
       </nav>
 
