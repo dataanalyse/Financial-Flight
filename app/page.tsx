@@ -92,12 +92,12 @@ export default function FinKidsAcademy() {
   const [nameInput, setNameInput]     = useState("");
   const [player, setPlayer]           = useState<PlayerData | null>(null);
   const [showXPPopup, setShowXPPopup] = useState(false);
+  const [hydrated, setHydrated]       = useState(false);
 
-  // Load player on mount
+  // Check localStorage before rendering anything — prevents landing page flash
   useEffect(() => {
     const saved = loadPlayer();
     if (saved) {
-      // Streak: reset to 0 if more than 1 day has passed
       const yesterday = new Date();
       yesterday.setDate(yesterday.getDate() - 1);
       const yStr = yesterday.toISOString().split("T")[0];
@@ -107,7 +107,11 @@ export default function FinKidsAcademy() {
       setPlayer(saved);
       setView("hub");
     }
+    setHydrated(true);
   }, []);
+
+  // Show nothing until localStorage is checked — avoids flash of landing page
+  if (!hydrated) return null;
 
   const handleStart = () => {
     const name = nameInput.trim() || "Explorer";
